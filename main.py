@@ -1,6 +1,8 @@
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QLabel
 
+from DigitRecognizer import DigitRecognizer
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -17,6 +19,13 @@ class MainWindow(QMainWindow):
         self.load_button.setGeometry(50, 270, 100, 30)  # Set the button position and size
         self.load_button.clicked.connect(self.load_image)
 
+        # Create a QPushButton widget for digit recognition
+        self.recognize_button = QPushButton("Digit Recognition", self)
+        self.recognize_button.setGeometry(200, 270, 150, 30)  # Set the button position and size
+        self.recognize_button.clicked.connect(self.perform_digit_recognition)
+
+        self.loaded_image = None
+
     def load_image(self):
         # Open a file dialog to select an image file
         file_dialog = QFileDialog()
@@ -28,6 +37,15 @@ class MainWindow(QMainWindow):
             # Load and set the image
             pixmap = QPixmap(file_path)
             self.image_label.setPixmap(pixmap)
+            self.loaded_image = pixmap
+
+    def perform_digit_recognition(self):
+        if self.loaded_image is not None:
+            # Perform digit recognition on the loaded image
+            digit_recognizer = DigitRecognizer()
+            recognized_digit = digit_recognizer.digit_recognize(self.loaded_image)
+
+            print(f"Recognized digit: {recognized_digit}")
 
 
 if __name__ == '__main__':
