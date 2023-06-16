@@ -52,8 +52,11 @@ class MainWindow(QMainWindow):
             self.digit_label.setText(f"Recognized digit: {recognized_digit}")
 
 
-if __name__ == '__main__':
+def main():
     app = QApplication([])
     window = MainWindow()
     window.show()
     app.exec()
+
+if __name__ == '__main__':
+    main()
