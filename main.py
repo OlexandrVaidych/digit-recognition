@@ -8,7 +8,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(100, 100, 400, 300)
+        self.setGeometry(100, 100, 400, 350)
 
         # Create a QLabel widget to display the image
         self.image_label = QLabel(self)
@@ -23,6 +23,10 @@ class MainWindow(QMainWindow):
         self.recognize_button = QPushButton("Digit Recognition", self)
         self.recognize_button.setGeometry(200, 270, 150, 30)  # Set the button position and size
         self.recognize_button.clicked.connect(self.perform_digit_recognition)
+
+        # Create a QLabel widget to display the recognized digit
+        self.digit_label = QLabel(self)
+        self.digit_label.setGeometry(125, 300, 100, 30)
 
         self.loaded_image = None
 
@@ -45,7 +49,7 @@ class MainWindow(QMainWindow):
             digit_recognizer = DigitRecognizer()
             recognized_digit = digit_recognizer.digit_recognize(self.loaded_image)
 
-            print(f"Recognized digit: {recognized_digit}")
+            self.digit_label.setText(f"Recognized digit: {recognized_digit}")
 
 
 if __name__ == '__main__':
