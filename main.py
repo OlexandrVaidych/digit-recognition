@@ -50,6 +50,8 @@ class MainWindow(QMainWindow):
             recognized_digit = digit_recognizer.digit_recognize(self.loaded_image)
 
             self.digit_label.setText(f"Recognized digit: {recognized_digit}")
+        else:
+            self.digit_label.setText("Error: No image")
 
 
 def main():
